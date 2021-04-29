@@ -57,3 +57,18 @@ fun Canvas.drawFLNode(i : Int, scale : Float, paint : Paint) {
     drawFinsLine(scale, w, h, paint)
 }
 
+class FinsLineView(ctx : Context) : View(ctx) {
+
+    override fun onDraw(canvas : Canvas) {
+
+    }
+
+    override fun onTouchEvent(event : MotionEvent) : Boolean {
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+
+            }
+        }
+        return true
+    }
+}
