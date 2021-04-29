@@ -28,3 +28,32 @@ fun Float.maxScale(i : Int, n : Int) : Float = Math.max(0f, this - i * n.inverse
 fun Float.divideScale(i : Int, n : Int) : Float = Math.min(n.inverse(), maxScale(i, n)) * n
 fun Float.sinify() : Float = Math.sin(this * Math.PI).toFloat()
 
+fun Canvas.drawFinsLine(scale : Float, w : Float, h : Float, paint : Paint) {
+    val size : Float = Math.min(w, h) / sizeFactor
+    val sf : Float = scale.sinify()
+    val gap : Float = size / parts
+    save()
+    translate(0f, h / 2)
+    for (j in 0..(parts - 1)) {
+        save()
+        translate(j * gap, 0f)
+        for (k in 0..2) {
+            save()
+            rotate(rot * (k - 1) * sf.divideScale(parts + j, parts * 2))
+            drawLine(0f, 0f, gap * sf.divideScale(j, 2 * parts), 0f, paint)
+            restore()
+        }
+        restore()
+    }
+    restore()
+}
+
+fun Canvas.drawFLNode(i : Int, scale : Float, paint : Paint) {
+    paint.color = Color.parseColor(colors[i])
+    paint.strokeCap = Paint.Cap.ROUND
+    val w : Float = width.toFloat()
+    val h : Float = height.toFloat()
+    paint.strokeWidth = Math.min(w, h) / strokeFactor
+    drawFinsLine(scale, w, h, paint)
+}
+
