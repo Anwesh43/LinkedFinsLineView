@@ -1,0 +1,4 @@
+include ':finslineview'
+include ':FinsLineView'
+include ':app'
+rootProject.name = "LinkedFinsLineView"
