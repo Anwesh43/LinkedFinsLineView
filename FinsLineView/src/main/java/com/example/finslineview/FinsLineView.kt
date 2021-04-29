@@ -183,4 +183,27 @@ class FinsLineView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : FinsLineView) {
+
+        private val animator : Animator = Animator(view)
+        private val finsLine : FinsLine = FinsLine(0)
+        private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        fun render(canvas : Canvas) {
+            canvas.drawColor(backColor)
+            finsLine.draw(canvas, paint)
+            animator.animate {
+                finsLine.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            finsLine.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
