@@ -208,4 +208,13 @@ class FinsLineView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : FinsLineView {
+            val view : FinsLineView = FinsLineView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
